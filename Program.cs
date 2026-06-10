@@ -9,6 +9,12 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.AddControllers();
 
+// Content root fix
+builder.Environment.ContentRootPath = Path.GetFullPath(
+    Path.Combine(AppContext.BaseDirectory, "..", "..", ".."));
+builder.Environment.WebRootPath = Path.Combine(
+    builder.Environment.ContentRootPath, "wwwroot");
+
 var app = builder.Build();
 
 app.UseStaticFiles();
